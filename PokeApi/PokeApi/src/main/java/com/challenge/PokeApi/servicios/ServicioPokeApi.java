@@ -84,17 +84,19 @@ public class ServicioPokeApi {
       return listado;
     }
 
-    public InformacionPokemonDTO obtenerInformacionAdicionalPokemon(InformacionPokemonDTO pokemon) throws JsonMappingException, JsonProcessingException{
+    public InformacionPokemonDTO obtenerInformacionAdicionalPokemon(String id, String name) throws JsonMappingException, JsonProcessingException{
       ObjectMapper objectMapper = new ObjectMapper();
-      String jsonPokemonString = this.traerDatos("/pokemon/" + pokemon.getIdPokemon());
+      String jsonPokemonString = this.traerDatos("/pokemon/" + id);
       JsonNode nodePokemons = objectMapper.readTree(jsonPokemonString);
       List<String> moves = this.obtenerArrayAPartirDeUnNodo(nodePokemons,"moves","move");
       List<String> stats = this.obtenerArrayAPartirDeUnNodo(nodePokemons,"stats","stat");
       String height = nodePokemons.get("height").asText();
+      InformacionPokemonDTO pokemon = new InformacionPokemonDTO();
+      pokemon.setName(name);
       pokemon.setMoves(moves);
       pokemon.setStats(stats);
       pokemon.setHeight(height);
-      pokemon.setDescription(this.descripcionPokemon(pokemon.getIdPokemon()));
+      pokemon.setDescription(this.descripcionPokemon(id));
       return pokemon;
     }
 

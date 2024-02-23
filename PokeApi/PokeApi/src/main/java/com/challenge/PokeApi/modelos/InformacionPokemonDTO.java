@@ -13,8 +13,9 @@ public class InformacionPokemonDTO {
     private String image;
     private List<String> moves;
     private String description;
-    private String information;
     private String height;
+
+    public InformacionPokemonDTO(){}
     
     public InformacionPokemonDTO(String idPokemon, String name ,  List<String> abilities, List<String> types, double weight,String image){
         this.idPokemon = idPokemon;
@@ -72,15 +73,7 @@ public class InformacionPokemonDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getInformation() {
-        return information;
-    }
-
-    public void setInformation(String information) {
-        this.information = information;
-    }
-
+    
     public String getHeight() {
         return height;
     }
